@@ -113,14 +113,48 @@
         "System & Network Architecture Controls",
         "Log Analysis & SIEM Tools Integration",
         "Threat Intelligence Platforms & IoCs",
-        "Security Automation, Orchestration (SOAR), and AI Integration"
+        "Security Automation, Orchestration (SOAR), and AI Integration",
+        "Vulnerability Identification, Scanning Tools & Prioritization",
+        "Endpoint Telemetry & Behavioral Analytics",
+        "Network Traffic Analysis & Packet Capture Analysis"
       ],
       modules: [
-        { id: "mod1", label: "Module 1 – Security Operations" }
+        { id: "mod1", label: "Module 1 – Security Operations" },
+        { id: "mod2", label: "Module 2 – Vulnerability Management" },
+        { id: "mod3", label: "Module 3 – Incident Response and Management" }
       ],
       exams: [
         { id: "practice-1", label: "CySA+ Practice Exam #1" },
         { id: "chapter-quizzes", label: "CySA+ Domain Quizzes" }
+      ],
+      questions: []
+    },
+    "pt0-003": {
+      title: "CompTIA PenTest+ (PT0-003)",
+      code: "PT0-003",
+      shortCode: "PenTest+",
+      productCode: "PT0-003",
+      durationMinutes: 165,
+      passPercentage: 75,
+      domains: [
+        "Pre-engagement activities, legal concepts, and compliance frameworks",
+        "Scoping, targets, and defining rules of engagement (ROE)",
+        "Information gathering and passive reconnaissance",
+        "Active enumeration and scanning",
+        "Vulnerability Discovery and Analysis",
+        "Attacks and Exploits",
+        "Post-Exploitation and Lateral Movement"
+      ],
+      modules: [
+        { id: "mod1", label: "Module 1 – Engagement Management" },
+        { id: "mod2", label: "Module 2 – Reconnaissance and Enumeration" },
+        { id: "mod3", label: "Module 3 – Vulnerability Discovery and Analysis" },
+        { id: "mod4", label: "Module 4 – Attacks and Exploits" },
+        { id: "mod5", label: "Module 5 – Post-Exploitation and Lateral Movement" }
+      ],
+      exams: [
+        { id: "practice-1", label: "PenTest+ Practice Exam #1" },
+        { id: "chapter-quizzes", label: "PenTest+ Domain Quizzes" }
       ],
       questions: []
     },
@@ -208,7 +242,11 @@
       "SC100": "sc-100",
       "SC500": "sc-500",
       "AWS-SAA": "aws-saa-c03",
-      "SAAC03": "aws-saa-c03"
+      "SAAC03": "aws-saa-c03",
+      "PENTEST+": "pt0-003",
+      "PENTEST": "pt0-003",
+      "PT0003": "pt0-003",
+      "PT0-003": "pt0-003"
     };
     Object.entries(aliases).forEach(([k, v]) => {
       if (EXAM_REGISTRY[v]) map[k] = v;
