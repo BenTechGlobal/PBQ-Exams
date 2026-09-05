@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodingHamme Practice Exam</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav id="top-navbar" class="top-navbar">
+    <div class="nav-brand">
+      <span class="brand-mark">CH</span>
+      <span class="brand-name">CodingHamme <em>Practice Exam</em></span>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-search">
+        <input type="search" id="product-search" placeholder="Search products…" aria-label="Search products" />
+      </div>
+      <a class="nav-link" href="https://bentechglobal.github.io/CodingHamme-Practice-Exams/" target="_blank" rel="noopener noreferrer" id="btn-back-mcq" title="Return to MCQ Practice Exam platform">← MCQ Practice</a>
+      <button class="nav-link" id="btn-help" type="button">Help Center</button>
+      <button class="nav-link" id="btn-tools" type="button">Tools</button>
+      <div class="nav-user">
+        <span class="user-avatar" aria-hidden="true">U</span>
+        <span class="user-name">Learner</span>
+      </div>
+    </div>
+  </nav>
+
+  <div id="app">
+    <section id="view-dashboard" class="view active">
+      <div class="dashboard-header">
+        <h1>CodingHamme Practice Exam</h1>
+        <p class="dashboard-sub">Select a product to begin practice or simulation</p>
+      </div>
+      <div class="product-tabs">
+        <button class="tab active" data-tab="active" type="button" id="tab-my-products">My Products</button>
+        <button class="tab" data-tab="archived" type="button" id="tab-archived">Archived Products</button>
+        <button class="tab" data-tab="saved" type="button" id="tab-saved">Load Saved Exams</button>
+        <button class="btn btn-activate" id="btn-activate-product" type="button">+ Activate Product</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+      <!-- Ported promotional engagement cards -->
+      <div class="marketing-promo-grid" id="marketing-promo-grid">
+        <a href="https://www.whatsapp.com/channel/0029VbAp1qHIXnltu1srjl3A"
+           target="_blank" rel="noopener noreferrer" class="promo-card promo-card-link">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Join Our Community" />
+          <div class="promo-body">
+            <h3>Join Our Community</h3>
+            <p>Career Growth, Access to Tech experts, and more</p>
+            <span class="promo-badge">TECH WITH CODINGHAMME</span>
+          </div>
+        </a>
+        <a id="personalizedTrainingLink" href="#" target="_blank" rel="noopener noreferrer" class="promo-card promo-card-link">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Personalized Training" />
+          <div class="promo-body">
+            <h3>Personalized Training</h3>
+            <p>Gain high demand skills with one-on-one personalized training tailored to your exact career goals, schedule, and current skill level</p>
+            <span class="promo-badge">TECH WITH CODINGHAMME</span>
+          </div>
+        </a>
+        <a href="https://bentechglobal.github.io/CodingHamme-Practice-Exams/" class="promo-card promo-card-link" id="pbt-promo-link">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Performance Based Certs" />
+          <div class="promo-body">
+            <h3>MCQ Certs/Exams</h3>
+            <p class="promo-pbt-line"> CISM,CISA e.t.c.</p>
+            <p class="promo-pbt-desc">Multi-Choice type Questions</p>
+            <span class="promo-badge">MCQ</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="view-mode-select" class="view hidden">
+      <button class="btn-back" id="btn-back-dashboard" type="button">← Back to Products</button>
+      <div class="mode-hero">
+        <div class="product-cover" id="mode-product-cover">CCNA</div>
+        <h1 id="mode-product-title">Product Title</h1>
+        <p class="mode-label">SELECT TEST OPTION</p>
+      </div>
+      <div class="mode-cards">
+        <article class="mode-card" data-mode="guided">
+          <div class="mode-icon">☰</div>
+          <h2>Guided Practice Test</h2>
+          <ul><li>Configurable</li><li>Answers / Review as you go</li><li>Can be saved</li></ul>
+          <button class="btn btn-select-mode" type="button">Select</button>
+        </article>
+        <article class="mode-card" data-mode="flashcard">
+          <div class="mode-icon">⧉</div>
+          <h2>Flash Card Practice</h2>
+          <ul><li>Configurable</li><li>Answers / Review as you go</li><li>Can be saved</li></ul>
+          <button class="btn btn-select-mode" type="button">Select</button>
+        </article>
+        <article class="mode-card" data-mode="exam">
+          <div class="mode-icon">▣</div>
+          <h2>Exam Simulation</h2>
+          <ul><li>Timed, can be saved</li><li>Review answers at the end</li><li>Simulation of a real exam</li></ul>
+          <button class="btn btn-select-mode" type="button">Select</button>
+        </article>
+      </div>
+      <div class="mode-footer">
+        <button class="btn btn-secondary" id="btn-load-saved" type="button">Load a saved test</button>
+        <div class="mode-footer-actions">
+          <button class="btn btn-secondary" id="btn-mode-cancel" type="button">Cancel</button>
+          <button class="btn btn-primary" id="btn-mode-continue" type="button" disabled>Select Option to Start →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-objectives" class="view hidden">
+      <div class="stage-banner">
+        <span id="obj-mode-label">Guided Practice Test</span>
+        <strong id="obj-product-title">Product</strong>
+      </div>
+      <div class="objectives-panel">
+        <h2>Exams</h2>
+        <p class="hint">Default settings are selected. Start with defaults or continue configuring.</p>
+        <label class="check-row master"><input type="checkbox" id="exam-toggle-all" checked /><span>Toggle everything, or select individual exams below:</span></label>
+        <div class="check-grid" id="exam-check-list"></div>
+        <h2>Objectives / Modules</h2>
+        <label class="check-row master"><input type="checkbox" id="obj-toggle-all" checked /><span>Toggle everything, or select individual objectives below:</span></label>
+        <div class="check-grid two-col" id="obj-check-list"></div>
+      </div>
+      <div class="stage-footer">
+        <button class="btn btn-secondary" id="btn-obj-cancel" type="button">Cancel</button>
+        <button class="btn btn-secondary" id="btn-obj-default" type="button">Start Default Test</button>
+        <button class="btn btn-primary" id="btn-obj-continue" type="button">Continue Configuration →</button>
+      </div>
+    </section>
+
+    <section id="view-configure" class="view hidden">
+      <div class="stage-banner">
+        <span id="cfg-mode-label">Guided Practice Test</span>
+        <strong id="cfg-product-title">Product</strong>
+      </div>
+      <div class="configure-panel">
+        <h2>Configure</h2>
+        <div class="cfg-block">
+          <label class="check-row"><input type="checkbox" id="cfg-stop-after" /><span>Stop test after</span></label>
+          <div class="slider-row">
+            <input type="range" id="cfg-time-slider" min="10" max="180" value="120" />
+            <div class="slider-labels"><span>10 min</span><span id="cfg-time-value">120 min</span><span>180 max</span></div>
+          </div>
+        </div>
+        <div class="cfg-grid-2">
+          <div class="cfg-field">
+            <label for="cfg-max-questions">Select no more questions than</label>
+            <input type="number" id="cfg-max-questions" min="1" max="200" value="120" />
+          </div>
+          <div class="cfg-field">
+            <label for="cfg-qtype">Select question types</label>
+            <select id="cfg-qtype">
+              <option value="all">All Question Types</option>
+              <option value="single">Multiple Choice</option>
+              <option value="multiselect">Multiple Response</option>
+              <option value="dragdrop">Drag &amp; Drop</option>
+              <option value="hotspot">Hotspot</option>
+            </select>
+          </div>
+        </div>
+        <div class="cfg-grid-2">
+          <div class="cfg-field">
+            <label>Select only questions I've missed X or more times</label>
+            <div class="chip-group" id="cfg-missed-chips" data-group="missed">
+              <button type="button" class="chip active" data-val="0">0</button>
+              <button type="button" class="chip" data-val="1">1</button>
+              <button type="button" class="chip" data-val="2">2</button>
+              <button type="button" class="chip" data-val="3">3</button>
+              <button type="button" class="chip" data-val="4">4</button>
+            </div>
+          </div>
+          <div class="cfg-field">
+            <label>Skip questions I've answered correctly X or more times</label>
+            <div class="chip-group" id="cfg-correct-chips" data-group="correct">
+              <button type="button" class="chip active" data-val="0">0</button>
+              <button type="button" class="chip" data-val="1">1</button>
+              <button type="button" class="chip" data-val="2">2</button>
+              <button type="button" class="chip" data-val="3">3</button>
+              <button type="button" class="chip" data-val="4">4</button>
+            </div>
+          </div>
+        </div>
+        <div class="cfg-toggles">
+          <label class="toggle-row"><span>Order by Objectives</span><input type="checkbox" id="cfg-order-obj" checked /></label>
+          <label class="toggle-row"><span>Randomize Questions</span><input type="checkbox" id="cfg-random-q" checked /></label>
+          <label class="toggle-row disabled"><span>Randomize Answers</span><input type="checkbox" id="cfg-random-a" disabled /></label>
+          <label class="toggle-row"><span>Select only marked questions</span><input type="checkbox" id="cfg-marked-only" /></label>
+          <label class="toggle-row"><span>Select only questions with notes</span><input type="checkbox" id="cfg-notes-only" /></label>
+          <label class="toggle-row"><span>Show number of correct answers</span><input type="checkbox" id="cfg-show-count" checked /></label>
+        </div>
+      </div>
+      <div class="stage-footer">
+        <button class="btn btn-secondary" id="btn-cfg-restore" type="button">Restore Default Settings</button>
+        <button class="btn btn-secondary" id="btn-cfg-save" type="button">Save Settings</button>
+        <button class="btn btn-secondary" id="btn-cfg-cancel" type="button">Cancel</button>
+        <button class="btn btn-primary" id="btn-cfg-start" type="button">Start Test →</button>
+      </div>
+    </section>
+
+    <section id="view-exam" class="view hidden">
+      <header class="exam-topbar">
+        <div class="exam-topbar-left">
+          <span class="exam-mode-pill" id="exam-mode-pill">Guided</span>
+          <strong id="exam-running-title">Exam Title</strong>
+        </div>
+        <div class="exam-topbar-center">
+          <span class="timer-label">Time</span>
+          <span class="timer-value" id="timer-display">00:00</span>
+        </div>
+        <div class="exam-topbar-right">
+          <button class="btn btn-ghost" id="btn-new-exam" type="button">New Exam</button>
+          <button class="btn btn-ghost" id="btn-save-exam" type="button">Save</button>
+          <button class="btn btn-ghost" id="btn-review-exam" type="button">Review</button>
+          <button class="btn btn-danger-outline" id="btn-grade-exam" type="button">Grade Exam</button>
+        </div>
+      </header>
+      <div class="exam-body">
+        <div class="question-meta">
+          <div>
+            <span id="question-counter">Question 1 of 10</span>
+            <span class="qid" id="question-id">ID: —</span>
+          </div>
+          <div class="meta-actions">
+            <button class="btn btn-sm" id="btn-mark" type="button">Mark Question</button>
+            <button class="btn btn-sm" id="btn-feedback" type="button">Send Feedback</button>
+          </div>
+        </div>
+        <div class="exam-split">
+          <section class="scenario-pane">
+            <h3>Scenario &amp; Requirements</h3>
+            <div id="scenario-content"></div>
+          </section>
+          <section class="workspace-pane">
+            <div class="workspace-head">
+              <h3>Response Area</h3>
+              <span class="q-type-badge" id="q-type-badge">—</span>
+            </div>
+            <div id="workspace-content"></div>
+            <div id="guided-feedback" class="guided-feedback hidden"></div>
+          </section>
+        </div>
+      </div>
+      <footer class="exam-toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-secondary" id="btn-view-answer" type="button">View Answer</button>
+          <button class="btn btn-secondary" id="btn-reset-q" type="button">Reset Question</button>
+          <button class="btn btn-secondary" id="btn-create-notes" type="button">Create Notes</button>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn btn-secondary" id="btn-prev" type="button" disabled>← Previous</button>
+          <button class="btn btn-primary" id="btn-next" type="button">Next Question →</button>
+        </div>
+      </footer>
+    </section>
+
+    <section id="view-flashcard" class="view hidden">
+      <header class="exam-topbar">
+        <div class="exam-topbar-left">
+          <span class="exam-mode-pill">Flash Card</span>
+          <strong id="fc-title">Product</strong>
+        </div>
+        <div class="exam-topbar-right">
+          <button class="btn btn-ghost" id="btn-fc-exit" type="button">Exit</button>
+        </div>
+      </header>
+      <div class="flashcard-stage">
+        <div class="flashcard" id="flashcard">
+          <div class="fc-front" id="fc-front"></div>
+          <div class="fc-back hidden" id="fc-back"></div>
+        </div>
+        <div class="fc-actions">
+          <button class="btn btn-secondary" id="btn-fc-flip" type="button">Flip Card</button>
+          <button class="btn btn-secondary" id="btn-fc-prev" type="button">← Prev</button>
+          <button class="btn btn-primary" id="btn-fc-next" type="button">Next →</button>
+        </div>
+        <p class="fc-counter" id="fc-counter">1 / 10</p>
+      </div>
+    </section>
+
+    <section id="view-report" class="view hidden">
+      <div class="report-container">
+        <header class="report-header">
+          <h1>Exam Score Report</h1>
+          <p class="report-subtitle" id="report-subtitle">—</p>
+        </header>
+        <section class="score-summary">
+          <div class="score-circle" id="score-circle">
+            <span id="score-percent">0%</span>
+            <span class="score-label">Overall</span>
+          </div>
+          <div class="score-details">
+            <div class="detail-row"><span>Result</span><strong id="pass-fail">—</strong></div>
+            <div class="detail-row"><span>Correct</span><strong id="correct-count">0 / 0</strong></div>
+            <div class="detail-row"><span>Passing Score</span><strong id="pass-threshold">—</strong></div>
+            <div class="detail-row"><span>Time Used</span><strong id="time-used">00:00</strong></div>
+          </div>
+        </section>
+        <section class="domain-breakdown">
+          <h2>Domain Performance</h2>
+          <div id="domain-bars"></div>
+        </section>
+        <section class="question-review">
+          <h2>Detailed Answer Review</h2>
+          <div id="review-list"></div>
+        </section>
+        <div class="report-actions">
+          <button class="btn btn-primary" id="btn-retake" type="button">Retake This Exam</button>
+          <button class="btn btn-secondary" id="btn-back-to-selection" type="button">Back to Products</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="modal-history" class="modal hidden">
+    <div class="modal-backdrop" data-close="modal-history"></div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header"><h2>Exam History</h2><button class="btn-close" data-close="modal-history" type="button">×</button></div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+  <div id="modal-notes" class="modal hidden">
+    <div class="modal-backdrop" data-close="modal-notes"></div>
+    <div class="modal-dialog">
+      <div class="modal-header"><h2>Notes</h2><button class="btn-close" data-close="modal-notes" type="button">×</button></div>
+      <textarea id="notes-editor" rows="8" placeholder="Write notes for this question…"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="modal-notes" type="button">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-notes" type="button">Save Notes</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-activate" class="modal hidden">
+    <div class="modal-backdrop" data-close="modal-activate"></div>
+    <div class="modal-dialog">
+      <div class="modal-header"><h2>Activate Product</h2><button class="btn-close" data-close="modal-activate" type="button">×</button></div>
+      <p>Enter a product activation code to unlock a certification exam bank on this device. Unlocked products stay available across sessions in this browser.</p>
+      <input type="text" id="activate-code" placeholder="e.g. CCNA-200-301" autocomplete="off" spellcheck="false" />
+      <p id="activate-feedback" class="activate-feedback" role="status" aria-live="polite"></p>
+      <p class="activate-hint">Codes match the product identifier on your license (for example <code>CCNA-200-301</code>, <code>CS0-004</code>, <code>N10-009</code>, <code>SY0-701</code>, <code>SC-100</code>, <code>SC-500</code>, <code>AWS-SAA-C03</code>).</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="modal-activate" type="button">Cancel</button>
+        <button class="btn btn-primary" id="btn-do-activate" type="button">Activate</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-submit" class="modal hidden">
+    <div class="modal-backdrop" data-close="modal-submit"></div>
+    <div class="modal-dialog">
+      <h2>End Exam &amp; Grade?</h2>
+      <p id="submit-summary">Unanswered items will be scored as incorrect.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="modal-submit" type="button">Return to Exam</button>
+        <button class="btn btn-danger" id="btn-confirm-grade" type="button">Confirm &amp; Grade</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Legal / Privacy / Help Center views (ported) ========== -->
+  <section id="view-privacy" class="view hidden legal-doc-layout">
+    <div class="legal-doc-hero">
+      <div class="legal-doc-hero-inner">
+        <button type="button" class="btn-back-light" id="btn-back-from-privacy">← Back</button>
+        <p class="legal-doc-tag">IT CERTIFICATION</p>
+        <h1 class="legal-doc-title">Privacy Policy</h1>
+        <p class="legal-doc-updated">Last updated: August 1, 2026</p>
+      </div>
+    </div>
+    <article class="legal-doc-body">
+      <p class="legal-doc-lead">
+        CodingHamme Practice Exam (“CodingHamme,” “we,” “us,” or “our”) respects your privacy.
+        This Privacy Policy explains how we collect, use, store, and protect information when you use our practice-exam platform and related services.
+      </p>
+      <section class="legal-section">
+        <h2>1. Information We Collect</h2>
+        <h3>1.1 Account &amp; Registration Data</h3>
+        <p>When you create an account, we may store a username, email address, and a password (or password hash) that you provide. These credentials are used solely to authenticate access to your practice products and saved progress.</p>
+        <h3>1.2 Practice &amp; Progress Data</h3>
+        <p>To deliver exam history, bookmarks, notes, and saved sessions, we store practice-related data in your browser’s local storage (for example: question attempts, scores, bookmarks, and configuration preferences). This data remains on your device unless you clear it or use the in-app Reset Data feature.</p>
+        <h3>1.3 Technical &amp; Usage Data</h3>
+        <p>Like most web applications, standard browser and device information (such as browser type, approximate region inferred from network, and basic error logs) may be processed to keep the service secure and functional. We do not sell this information.</p>
+        <h3>1.4 Feedback Submissions</h3>
+        <p>If you submit content or software feedback from within an exam session, the message you type, the related question identifier, product code, and a timestamp may be transmitted to our support channel so we can improve materials and resolve issues.</p>
+      </section>
+      <section class="legal-section">
+        <h2>2. How We Use Information</h2>
+        <ul>
+          <li>To provide, maintain, and improve the practice-exam experience.</li>
+          <li>To authenticate users and restore saved exams, notes, and history on the same device.</li>
+          <li>To respond to support and feedback requests.</li>
+          <li>To protect against abuse, fraud, or security incidents.</li>
+          <li>To comply with applicable legal obligations.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>3. Cookies &amp; Local Storage</h2>
+        <p>
+          CodingHamme primarily relies on <strong>browser local storage</strong> (not third-party advertising cookies) to persist login state, product activations, exam progress, bookmarks, and notes on the device you use.
+          Clearing site data in your browser or using a Reset Data action will remove this information from that device.
+        </p>
+      </section>
+      <section class="legal-section">
+        <h2>4. Sharing of Information</h2>
+        <p>We do not sell your personal information. We may share limited data only when you request it, when a service provider processes data on our behalf, when required by law, or when necessary to protect rights and safety.</p>
+      </section>
+      <section class="legal-section">
+        <h2>5. Data Retention</h2>
+        <p>Practice history and notes stored in local storage remain until you delete them, clear browser data, or perform a full data reset. Feedback submissions are retained only as long as needed to investigate and improve the product.</p>
+      </section>
+      <section class="legal-section">
+        <h2>6. Your Rights</h2>
+        <p>Depending on your location, you may have rights such as access, correction, deletion, restriction/objection, portability, and CCPA-style rights. We do not sell personal information. Contact us via in-app feedback or the community channel to exercise these rights.</p>
+      </section>
+      <section class="legal-section">
+        <h2>7. Security</h2>
+        <p>We apply reasonable technical and organizational measures appropriate to a client-side practice platform. No method of transmission or storage is 100% secure; you are responsible for securing the device on which you practice.</p>
+      </section>
+      <section class="legal-section">
+        <h2>8. Children’s Privacy</h2>
+        <p>CodingHamme Practice Exam is intended for adult learners and professional certification candidates. We do not knowingly collect personal information from children under 13.</p>
+      </section>
+      <section class="legal-section">
+        <h2>9. Contact</h2>
+        <p>For privacy questions, use the in-app Send Feedback feature or the community channels linked from promotional cards.</p>
+      </section>
+    </article>
+  </section>
+
+  <section id="view-legal" class="view hidden legal-doc-layout">
+    <div class="legal-doc-hero">
+      <div class="legal-doc-hero-inner">
+        <button type="button" class="btn-back-light" id="btn-back-from-legal">← Back</button>
+        <p class="legal-doc-tag">IT CERTIFICATION</p>
+        <h1 class="legal-doc-title">Legal Notice &amp; Terms of Use</h1>
+        <p class="legal-doc-updated">Last updated: August 1, 2026</p>
+      </div>
+    </div>
+    <article class="legal-doc-body">
+      <p class="legal-doc-lead">
+        These Terms of Use (“Terms”) govern your access to and use of CodingHamme Practice Exam and related materials.
+        By accessing or using the platform, you agree to these Terms. If you do not agree, do not use the service.
+      </p>
+      <section class="legal-section">
+        <h2>1. Nature of the Service</h2>
+        <p>
+          CodingHamme provides independently developed practice questions, study tools, and exam-simulation interfaces intended for professional development and self-assessment.
+          Practice content is <strong>not</strong> an official exam, is not affiliated with or endorsed by CompTIA, ISC², EC-Council, Cisco, Microsoft, or any other certification body, and does not guarantee a passing score on any official examination.
+        </p>
+      </section>
+      <section class="legal-section">
+        <h2>2. Eligibility &amp; Accounts</h2>
+        <ul>
+          <li>You must be able to form a binding contract under applicable law to use the service.</li>
+          <li>You are responsible for maintaining the confidentiality of your credentials and for activity under your account.</li>
+          <li>Product activation codes, where used, are personal and may not be shared or resold without authorization.</li>
+        </ul>
+      </section>
+      <section class="legal-section">
+        <h2>3. Acceptable Use</h2>
+        <p>You agree not to copy, scrape, reverse-engineer, or redistribute question banks except for personal study; circumvent access controls; use the platform for illegal activity; or misrepresent the platform as an official certification exam.</p>
+      </section>
+      <section class="legal-section">
+        <h2>4. Intellectual Property</h2>
+        <p>
+          All software, interface designs, original question text, explanations, and branding provided by CodingHamme are protected by copyright.
+          CompTIA®, Network+®, Security+®, Cisco®, Microsoft®, and related marks are trademarks of their respective owners.
+          CodingHamme is not affiliated with, sponsored by, or endorsed by those organizations.
+        </p>
+      </section>
+      <section class="legal-section">
+        <h2>5. Disclaimers</h2>
+        <p>
+          THE PLATFORM AND ALL CONTENT ARE PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND.
+          We do not warrant that practice scores will correlate with official exam results or that content is error-free.
+        </p>
+      </section>
+      <section class="legal-section">
+        <h2>6. Limitation of Liability</h2>
+        <p>
+          TO THE MAXIMUM EXTENT PERMITTED BY LAW, CODINGHAMME SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF THE PLATFORM.
+          Total liability shall not exceed the amount paid for access in the twelve months preceding the claim, or USD $100, whichever is greater.
+        </p>
+      </section>
+      <section class="legal-section">
+        <h2>7. Contact</h2>
+        <p>For legal or terms-related inquiries, use the in-app feedback tools or community channels linked from the dashboard.</p>
+      </section>
+    </article>
+  </section>
+
+  <section id="view-helpcenter" class="view hidden helpcenter-layout">
+    <div class="hc-hero">
+      <div class="hc-hero-content">
+        <button type="button" class="btn-back-light" id="btn-back-from-help">← Back</button>
+        <p class="hc-hero-tag">IT CERTIFICATION</p>
+        <h1 class="hc-hero-title">Help Center</h1>
+      </div>
+    </div>
+    <div class="hc-body">
+      <div class="hc-intro">
+        <p>
+          CodingHamme Practice Exam delivers high-quality IT certification practice solutions.
+          Use Guided Practice for learning with review as you go, Flash Cards for quick recall, and Exam Simulation for timed, end-of-test review that mirrors real exam conditions.
+        </p>
+        <button type="button" class="hc-learn-more" id="btn-hc-learn-more">Learn More →</button>
+      </div>
+      <div class="hc-support-card">
+        <div class="hc-support-media">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="Support and guidance" />
+        </div>
+        <div class="hc-support-text">
+          <h2>Support</h2>
+          <p>
+            If you have corrections for content, submit comments via the <strong>“Send Feedback”</strong> button in the exam window.
+            For technical issues or product activation questions, use the community channel linked from the promotional cards or Help Center Learn More action.
+          </p>
+        </div>
+      </div>
+      <div class="hc-faq-card">
+        <h2 class="hc-faq-heading">FAQ</h2>
+        <div class="hc-faq-list" id="hcFaqList">
+          <div class="hc-faq-item">
+            <button type="button" class="hc-faq-question" aria-expanded="false">
+              <span>How do Guided, Flash Card, and Exam Simulation modes differ?</span>
+              <span class="hc-faq-chevron">▼</span>
+            </button>
+            <div class="hc-faq-answer" hidden>
+              <p>Guided mode lets you view answers and explanations as you go. Flash Card mode focuses on prompt/answer recall. Exam Simulation is timed with review only after grading, closer to a real exam experience.</p>
+            </div>
+          </div>
+          <div class="hc-faq-item">
+            <button type="button" class="hc-faq-question" aria-expanded="false">
+              <span>Can I save progress and resume later?</span>
+              <span class="hc-faq-chevron">▼</span>
+            </button>
+            <div class="hc-faq-answer" hidden>
+              <p>Yes. Use the Save control during an exam. Resume from the dashboard “Load Saved Exams” tab. Saved sessions are stored in your browser’s local storage on this device.</p>
+            </div>
+          </div>
+          <div class="hc-faq-item">
+            <button type="button" class="hc-faq-question" aria-expanded="false">
+              <span>What does Archived Products do?</span>
+              <span class="hc-faq-chevron">▼</span>
+            </button>
+            <div class="hc-faq-answer" hidden>
+              <p>Archiving hides a product from the main “My Products” list without deleting history or notes. You can unarchive it at any time from the Archived Products tab.</p>
+            </div>
+          </div>
+          <div class="hc-faq-item">
+            <button type="button" class="hc-faq-question" aria-expanded="false">
+              <span>Are these official exam questions?</span>
+              <span class="hc-faq-chevron">▼</span>
+            </button>
+            <div class="hc-faq-answer" hidden>
+              <p>No. Practice questions are independently developed study aids. They are not sourced from live certification exams and do not guarantee a passing score on any official test.</p>
+            </div>
+          </div>
+          <div class="hc-faq-item">
+            <button type="button" class="hc-faq-question" aria-expanded="false">
+              <span>How do I contact support?</span>
+              <span class="hc-faq-chevron">▼</span>
+            </button>
+            <div class="hc-faq-answer" hidden>
+              <p>Use Send Feedback inside an exam, or open the Join Our Community / Learn More links to reach the CodingHamme WhatsApp channel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Tools view (ported / simplified for PBQ) -->
+  <section id="view-tools" class="view hidden">
+    <div class="stage-banner">
+      <span>IT CERTIFICATION TOOLS</span>
+      <strong>Tools</strong>
+    </div>
+    <div class="configure-panel">
+      <div class="cfg-grid-2">
+        <div class="cfg-field">
+          <h3 style="margin-bottom:0.5rem;">Activate Product</h3>
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">Activate one or more products using an access code.</p>
+          <button class="btn btn-primary" id="btn-tools-activate" type="button">+ Activate Product</button>
+        </div>
+        <div class="cfg-field">
+          <h3 style="margin-bottom:0.5rem;">More Exam Resources</h3>
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">Learn more about books and other useful resources.</p>
+          <button class="btn btn-primary" id="btn-tools-resources" type="button">Learn More →</button>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;">
+        <h3 style="margin-bottom:0.5rem;">MCQ Practice Platform</h3>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">Switch to the multiple-choice (MCQ) practice exam platform for CompTIA, ISC², and related certifications.</p>
+        <a class="btn btn-secondary" href="https://bentechglobal.github.io/" target="_blank" rel="noopener noreferrer">Open MCQ Practice →</a>
+      </div>
+    </div>
+    <div class="stage-footer">
+      <button class="btn btn-secondary" id="btn-back-from-tools" type="button">← Back to Products</button>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>Copyright © 2026 CodingHamme. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#" id="footer-legal" role="button">Legal</a>
+      <span>·</span>
+      <a href="#" id="footer-privacy" role="button">Privacy</a>
+    </div>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
