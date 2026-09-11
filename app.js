@@ -210,6 +210,41 @@
         { id: "chapter-quizzes", label: "SC-500 Domain Quizzes" }
       ],
       questions: []
+    },
+    "ceh-v13-ai": {
+      title: "Certified Ethical Hacker v13 (CEH v13 AI)",
+      code: "CEH v13",
+      shortCode: "CEH",
+      productCode: "CEH-V13-AI",
+      durationMinutes: 240,
+      passPercentage: 70,
+      domains: [
+        "Information Security and Ethical Hacking Overview",
+        "Footprinting and Reconnaissance",
+        "System Hacking Phases and Attack Techniques",
+        "Network and Perimeter Hacking",
+        "Web Application Hacking",
+        "Wireless Network Hacking",
+        "Mobile Platform, IoT, and OT Hacking",
+        "Cloud Computing",
+        "Cryptography"
+      ],
+      modules: [
+        { id: "mod1", label: "Module 1 – Information Security and Ethical Hacking Overview" },
+        { id: "mod2", label: "Module 2 – Footprinting and Reconnaissance" },
+        { id: "mod3", label: "Module 3 – System Hacking Phases and Attack Techniques" },
+        { id: "mod4", label: "Module 4 – Network and Perimeter Hacking" },
+        { id: "mod5", label: "Module 5 – Web Application Hacking" },
+        { id: "mod6", label: "Module 6 – Wireless Network Hacking" },
+        { id: "mod7", label: "Module 7 – Mobile Platform, IoT, and OT Hacking" },
+        { id: "mod8", label: "Module 8 – Cloud Computing" },
+        { id: "mod9", label: "Module 9 – Cryptography" }
+      ],
+      exams: [
+        { id: "practice-1", label: "CEH v13 Practice Exam #1" },
+        { id: "chapter-quizzes", label: "CEH Domain Quizzes" }
+      ],
+      questions: []
     }
   };
 
@@ -246,7 +281,12 @@
       "PENTEST+": "pt0-003",
       "PENTEST": "pt0-003",
       "PT0003": "pt0-003",
-      "PT0-003": "pt0-003"
+      "PT0-003": "pt0-003",
+      "CEH": "ceh-v13-ai",
+      "CEHV13": "ceh-v13-ai",
+      "CEH-V13": "ceh-v13-ai",
+      "CEH-V13-AI": "ceh-v13-ai",
+      "CEHV13AI": "ceh-v13-ai"
     };
     Object.entries(aliases).forEach(([k, v]) => {
       if (EXAM_REGISTRY[v]) map[k] = v;
