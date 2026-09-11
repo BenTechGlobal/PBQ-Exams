@@ -40791,3 +40791,4 @@ explanation: "Line l4 is commented out and therefore does not create an active d
     "explanation": "Disabling OCSP stapling forces clients to contact the CA’s OCSP responder themselves or to skip revocation checking. Stapling improves both privacy and connection latency and should be enabled when a reliable OCSP source is available."
   }
 ];
+export default questions;
